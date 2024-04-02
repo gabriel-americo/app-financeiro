@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   StyleSheet,
-  Text,
   StatusBar,
   TouchableOpacity,
 } from "react-native";
@@ -14,35 +13,24 @@ const statusBarHeight = StatusBar.currentHeight
   ? StatusBar.currentHeight + 22
   : 64;
 
-export default function Header({ name }) {
+const Header = ({ name }) => {
+  const transitionConfig = {
+    type: "timing",
+    duration: 800,
+    delay: 300
+  };
+
   return (
     <View style={styles.container}>
-      <MotiView style={styles.content} from ={{
-        translateY: -150,
-        opacity: 0,
-        }} 
-        animate={{
-          translateY: 0,
-          opacity: 1,
-        }}
-        transition={{
-          type: "timing",
-          duration: 800,
-          delay: 300
-        }}>
+      <MotiView style={styles.content} 
+        from={{ translateY: -150, opacity: 0 }} 
+        animate={{ translateY: 0, opacity: 1 }}
+        transition={transitionConfig}>
 
         <MotiText style={styles.username}
-        from={{
-          translateX: -300
-        }}
-        animate={{
-          translateX: 0
-        }}
-        transition={{
-          type: "timing",
-          duration: 800,
-          delay: 300
-        }}>
+          from={{ translateX: -300 }}
+          animate={{ translateX: 0 }}
+          transition={transitionConfig}>
           {name}
         </MotiText>
 
@@ -82,4 +70,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 44 / 2
   }
-});
+})
+
+export default Header;
